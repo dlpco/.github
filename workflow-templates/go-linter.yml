@@ -1,0 +1,25 @@
+name: Lint
+on:
+  - pull_request
+
+env:
+  GOPRIVATE: "github.com/dlpco/*"
+
+jobs:
+  golangci:
+    name: golangci-lint job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+
+      - uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.BOT_SSH_KEY }}
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.42.1
