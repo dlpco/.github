@@ -1,0 +1,24 @@
+name: Lint
+on:
+  - pull_request
+
+env:
+  GOPRIVATE: "github.com/dlpco/*"
+
+jobs:
+  golangci:
+    name: golangci-lint job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+
+      - name: Configure git for private modules
+        run: git config --global url."https://${{secrets.BOT_GITHUB_TOKEN}}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.42.1
