@@ -18,6 +18,8 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.BOT_SSH_KEY }}
+      - name: Configure git for private modules
+        run: git config --global url."https://${{secrets.BOT_GITHUB_TOKEN}}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
