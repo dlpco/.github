@@ -1,5 +1,5 @@
 {
-  "name": "Golangci Linter",
+  "name": "Golang Linter Workflow",
   "description": "Runs golangci-lint linters on a go repository.",
   "iconName": "gopher",
   "categories": ["Go"],
